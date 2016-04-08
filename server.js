@@ -7,12 +7,24 @@ var app = express();
 //requiring model folder
 var db = require('./models');
 
+//body parser requirement
+//var bodyParser = require('body-parser');
+
+// serve static files from public folder
+app.use(express.static(__dirname + '/public'));
+
+//app.use(bodyParser.urlencoded({ extended: false }));
+
+//////Routes///////
 
 
+/*
+ * HTML Endpoints
+ */
 
-
-
-
+app.get('/', function homepage (req, res) {
+  res.sendFile(__dirname + '/view/index.html');
+});
 
 
 
