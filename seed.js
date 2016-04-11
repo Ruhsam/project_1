@@ -5,7 +5,7 @@ var entryList=[];
                   entryList.push({
                      title: 'Beans',
                      date: 2000/11/02,
-                     text: 'Beans, beans, the musical fruit. The more you eat, the more you toot. The more you toot, the better you feel. So eat your beans at every meal!',
+                     text: 'Beanz, beans, the musical fruit. The more you eat, the more you toot. The more you toot, the better you feel. So eat your beans at every meal!',
                      comments: []
                   });
 
@@ -32,11 +32,6 @@ var commentList = [];
      text: 'A modern day Bill Shakespeare'
 
  });
-   // populate each entry comment list
-entryList.forEach(function(entry) {
-  entry.comment = entryList;
-});
-
 
 db.Entry.remove({}, function(err, entry){
 

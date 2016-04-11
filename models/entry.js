@@ -4,8 +4,8 @@ var Schema = mongoose.Schema;
 
 var entrySchema = new Schema ({
    title: String,
-   date: Date,
-   text: String,
+   date: String,
+   text: String
    //comments: [Comment.schema]
 
 });

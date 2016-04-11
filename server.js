@@ -29,11 +29,11 @@ app.get('/', function homepage (req, res) {
 });
 
 //json endpoints
-app.get('/api', function index(req, res) {
-  db.Entry.find({}, function(err, allEntries) {
-    res.json(allEntries);
-
-});
+app.get('/api/entry', function (req, res) {
+  db.Entry.find(function(err, entry){
+    if (err) { return console.log("index error: " + err); }
+    res.json(entry);
+  });
 });
 //          //shows all entry's
 // app.get('/api/entry', function index(req, res) {
