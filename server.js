@@ -3,19 +3,16 @@
 var express = require('express');
 //making express required and run on app variable
 var app = express();
-
+var bodyParser=require('body-parser');
+var PORT=process.env.PORT || 3000;
 //requiring model folder
 var db = require('./models');
-
-
-//var controllers = require('./controllers');
-//body parser requirement
-//var bodyParser = require('body-parser');
-
 // serve static files from public folder
 app.use(express.static(__dirname + '/public'));
+//body parser requirement
+app.use(bodyParser.urlencoded({ extended: true }));
 
-//app.use(bodyParser.urlencoded({ extended: false }));
+//var controllers = require('./controllers');
 
 //////Routes///////
 
@@ -35,13 +32,16 @@ app.get('/api/entry', function (req, res) {
     res.json(entry);
   });
 });
-//          //shows all entry's
-// app.get('/api/entry', function index(req, res) {
-//    db.Entry.findById(req.params.entryId, function(err, foundEntry) {
-//       console.log('responding with comments:', foundEntry);
-//       res.json(foundEntry);
-// });
-// });
+
+app.post('/api/entry', function (req, res) {
+  db.Entry.create(function(err, entry) {
+     if (err) {
+        console.log("we done messed up!", err);
+     }
+  console.log(req.body);
+  res.json(req.body);
+  });
+});
 //          //shows specific entry by id
 //app.get('/api/entry/:entryId', controllers.Entry.show);
 //          //post an entry
@@ -68,6 +68,6 @@ app.get('/api/entry', function (req, res) {
 
 
 // listen on port 3000
-app.listen(process.env.PORT || 3000, function () {
+app.listen(PORT, function () {
   console.log('Express server is running on http://localhost:3000/');
 });

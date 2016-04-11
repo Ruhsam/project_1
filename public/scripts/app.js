@@ -1,23 +1,5 @@
-// var entryList= [{
-//
-//                      title: 'Beans',
-//                      date: '2000/11/02',
-//                      text: 'Beans, beans, the musical fruit. The more you eat, the more you toot. The more you toot, the better you feel. So eat your beans at every meal!',
-//                      comments: []
-//                   },
-//                   {
-//                      title: 'Here is to..',
-//                      date: '2000/11/02',
-//                      text: 'Here is to a long life and a merry one. A quick death and an easy one. A pretty girl and an honest one. A cold pint and another one!',
-//                      comments: []
-//
-//                   }];
-
-
 $(document).ready(function() {
    console.log('app.js loaded!');
-
-
 
    $.ajax ({
       method: 'GET',
@@ -25,25 +7,21 @@ $(document).ready(function() {
       success: onSuccess
    });
 
-   // $.get('/api').success(function(returnedEntry) {
-   //    console.log(returnedEntry);
-   //     entryList.forEach(function(entry){
-   //       renderEntry(entry);
-   //     });
-   //
+   $("#formInfo").on('submit', function(event) {
+      event.preventDefault();
+      var entry = $(this).serialize();
+
+      console.log(entry);
+  $.ajax({
+     method: 'POST',
+     url: '/api/entry',
+     data: entry,
+     success: onPostSuccess,
+     error: onPostError
+  });
+});
+
 }); // end of document ready
-
-// $('#formInfo').on('submit', function(e) {
-//    e.preventDefault();
-//    $.ajax({
-//       method: 'POST',
-//       url: '/api/books',
-//       data: $(this).serialize(),
-//       success: newBookSuccess,
-//       error: newBookError
-//    });
-// });
-
 
 function onSuccess(json) {
   console.log(json, 'SUCCESS! Yeah it happened...you know, IT!');
@@ -55,9 +33,15 @@ function onError() {
   console.log('ERROR! Uh oh, something went wrong!');
 }
 
-
-
-
+///post confirmation data
+function onPostSuccess(json) {
+  console.log(json, 'Post SUCCESS! Yeah we posted it!');
+  renderEntry(json);
+  //});
+}
+function onPostError() {
+  console.log('ERROR! Uh oh, something went wrong!');
+}
 
 
 // this function takes a single entry and renders it to the page
@@ -69,5 +53,4 @@ function renderEntry(entry) {
 
 
    console.log('rendering entry:', entry);
-
 }

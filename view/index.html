@@ -19,23 +19,23 @@
 <body>
    <div>
          <h1>Not liveJournal</h1>
-         <container id = "formInfo">
+         <container>
             <div class="row">
               <div class="col-md-offset-4 col-md-4 col-xs-12 thumbnail entry-art">
-         <form class="form">
+         <form class="form" id="formInfo">
             <div class="form-group">
                <label for="exampleInputName2">Title</label>
-               <input type="text" class="form-control" id="exampleInputName2" placeholder="Hue Jass">
+               <input type="text" name="title" class="form-control" id="exampleInputName2" placeholder="Hue Jass">
             </div>
             <div class="form-group">
                <label for="Date">Today's Date</label>
-               <input type="Date" class="form-control" id="entryDate" placeholder="04/09/1986">
+               <input type="Date" class="form-control" name="date" id="entryDate" placeholder="04/09/1986">
             </div>
             <div class="form-text">
             <label for="textarea">Journal Entry</label>
-            <textarea class="form-control" rows="3"></textarea>
+            <textarea class="form-control" name="text"  rows="3"></textarea>
          </div>
-            <button id= "submission" type="button" class="btn btn-primary">Submit</button>
+            <button id= "submission" type="submit" class="btn btn-primary">Submit</button>
          </form>
          </container>
 </div>
