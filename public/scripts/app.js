@@ -52,6 +52,7 @@ function onError() {
 function onPostSuccess(json) {
   console.log(json, 'Post SUCCESS! Yeah we posted it!');
   renderEntry(json);
+  location.reload(true);
   //});
 }
 function onPostError() {

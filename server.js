@@ -46,18 +46,19 @@ app.post('/api/entry', function (req, res) {
    });
 });
 
+///////////////Removing from DB route//////////////////
 
    app.delete('/api/entry/:id', function (req, res) {
      // get entry id from url params (`req.params`)
      console.log('entry delete', req.params);
      var entryId = req.params.id;
-//      // find the index of the entry we want to remove
+     // find the index of the entry we want to remove
      db.Entry.findOneAndRemove({ _id: entryId }, function (err, deletedEntry) {
-       res.json(deleteEntry);
-//      });
+       res.json(deletedEntry);
+     });
    });
 //
-});
+//});
 
 // listen on port 3000
 app.listen(PORT, function () {
