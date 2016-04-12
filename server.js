@@ -12,7 +12,6 @@ app.use(express.static(__dirname + '/public'));
 //body parser requirement
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//var controllers = require('./controllers');
 
 //////Routes///////
 
@@ -33,39 +32,32 @@ app.get('/api/entry', function (req, res) {
   });
 });
 
-app.post('/api/entry', function (req, res) {
-  db.Entry.create(function(err, entry) {
-     if (err) {
-        console.log("we done messed up!", err);
-     }
-  console.log(req.body);
-  res.json(req.body);
-  });
-});
-//          //shows specific entry by id
-//app.get('/api/entry/:entryId', controllers.Entry.show);
-//          //post an entry
-// app.post('/api/entry', function (req, res) {
-// db.Entry.findById(req.params.entryId, function(err, foundEntry) {
-//     console.log(req.body);
-//     var newComment = new db.Comment(req.body);  // dangerous, in a real app we'd validate the incoming data
-//     foundEntry.comment.push(newEntry);
-//     foundEntry.save(function(err, savedEntry) {
-//       console.log('newComment created: ', newComment);
-//       res.json(newComment);  // responding with just the song, some APIs may respond with the parent object (Album in this case)
-//     });
-// });
-// });
-//          //delete an entry
-// app.delete('/api/entry/:entryId', controllers.Entry.destroy);
-//
-//          //shows a specific comment
-//app.get('/api/entry/:entryId/comment', controllers.entryComments.index);
-//          //posts a specific comment
-// app.post('/api/entry/:entryId/comment', controllers.entryComments.create);
-//          //deletes a specific comment
-// app.delete('/api/entry/:entryId/comment/:commentId', controllers.entryComments.destroy);
 
+///////////////Posting to DB route//////////////////
+app.post('/api/entry', function (req, res) {
+   var newEntry = new db.Entry({
+      title: req.body.title,
+      date: req.body.date,
+      text: req.body.text,
+   });
+   newEntry.save(function(err, saved) {
+      console.log('test test', req.body);
+      res.json(saved);
+   });
+});
+
+
+   app.delete('/api/entry/:id', function (req, res) {
+     // get entry id from url params (`req.params`)
+     console.log('entry delete', req.params);
+     var entryId = req.params.id;
+//      // find the index of the entry we want to remove
+     db.Entry.findOneAndRemove({ _id: entryId }, function (err, deletedEntry) {
+       res.json(deleteEntry);
+//      });
+   });
+//
+});
 
 // listen on port 3000
 app.listen(PORT, function () {
