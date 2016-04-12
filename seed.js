@@ -16,6 +16,27 @@ var entryList=[];
                      comments: []
 
                   });
+                  entryList.push({
+                     title: 'Ode to Travis',
+                     date: '2013/07/03',
+                     text: 'Roses are Red Violets are Violet...because here in WDI27 we are technical as fuck',
+                     comments: []
+
+                  });
+                  entryList.push({
+                     title: 'Enjoy the simple things',
+                     date: '2007/03/12',
+                     text: 'Just watched the bro in front of me, eat shit in front of the girl he was trying to impress. #TheWorldisJust',
+                     comments: []
+
+                  });
+                  entryList.push({
+                     title: 'Deep Thoughts',
+                     date: '2010/04/02',
+                     text: 'Ever wonder what soap is made of?',
+                     comments: []
+
+                  });
 
 var commentList = [];
 
