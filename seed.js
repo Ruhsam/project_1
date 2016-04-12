@@ -19,7 +19,7 @@ var entryList=[];
                   entryList.push({
                      title: 'Ode to Travis',
                      date: '2013/07/03',
-                     text: 'Roses are Red Violets are Violet...because here in WDI27 we are technical as fuck',
+                     text: 'Roses are Red Violets are Violet...not blue, because here in WDI27 we are technical as fuck',
                      comments: []
 
                   });
