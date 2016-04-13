@@ -1,37 +1,37 @@
 $(document).ready(function() {
-   console.log('app.js loaded!');
+  console.log('app.js loaded!');
 
-    $entryList = $('#entryTarget');
+  $entryList = $('#entryTarget');
 ///////HTTP "GET" code sent to server//////
-   $.ajax ({
-      method: 'GET',
-      url: '/api/entry',
-      success: onSuccess
-   });
-///////HTTP "POST" code sent to server//////
-   $("#formInfo").on('submit', function(event) {
-      event.preventDefault();
-      var entry = $(this).serialize();
-      console.log(entry);
-  $.ajax({
-     method: 'POST',
-     url: '/api/entry',
-     data: entry,
-     success: onPostSuccess,
-     error: onPostError
+  $.ajax ({
+    method: 'GET',
+    url: '/api/entry',
+    success: onSuccess
   });
-});
+///////HTTP "POST" code sent to server//////
+  $("#formInfo").on('submit', function(event) {
+    event.preventDefault();
+    var entry = $(this).serialize();
+    console.log(entry);
+    $.ajax({
+       method: 'POST',
+       url: '/api/entry',
+       data: entry,
+       success: onPostSuccess,
+       error: onPostError
+    });
+  });
 
-/////////////Delete button////////////////////
-$entryList.on('click', '#deleteButton', function() {
-   console.log('clicked delete button to', '/api/entry/'+$(this).attr('data-id'));
-   $.ajax({
+  /////////////Delete button////////////////////
+  $entryList.on('click', '#deleteButton', function() {
+    console.log('clicked delete button to', '/api/entry/'+$(this).attr('data-id'));
+    $.ajax({
      method: 'DELETE',
-     url: '/api/entry/'+$(this).attr('data-id'),
+     url: '/api/entry/'+$(this).attr('data-id'), // nice!
      success: onDeleteSuccess,
      error: onDeleteError
-   });
- });
+    });
+  });
 
 
 }); // end of document ready
@@ -70,11 +70,11 @@ function onDeleteError() {
 
 /////////////Renders post and get data to page///////////////
 function renderEntry(entry) {
-   var pullingInfo = $('#entryTemplate').html();
-   var compileHB = Handlebars.compile(pullingInfo);
-   var placingInfo = compileHB(entry);
-   $('#entryPlace').prepend(placingInfo);
+  var pullingInfo = $('#entryTemplate').html();
+  var compileHB = Handlebars.compile(pullingInfo);
+  var placingInfo = compileHB(entry);
+  $('#entryPlace').prepend(placingInfo);
 
 
-   console.log('rendering entry:', entry);
+  console.log('rendering entry:', entry);
 }
