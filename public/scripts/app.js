@@ -59,9 +59,9 @@ function onPostError() {
   console.log('ERROR! Uh oh, something went wrong!');
 }
 //////////////"DELETE" confirmation data/////////////
-function onDeleteSuccess(json) {
-  console.log(json, 'Delete SUCCESS! Well there goes that!');
-  renderEntry(json);
+function onDeleteSuccess(deletedEntry) {
+  console.log(deletedEntry, 'Delete SUCCESS! Well there goes that!');
+  removeEntry(deletedEntry._id);
   //});
 }
 function onDeleteError() {
@@ -75,4 +75,9 @@ function renderEntry(entry) {
    var placingInfo = compileHB(entry);
    $('#entryPlace').prepend(placingInfo);
 
+}
+
+function removeEntry(entryId) {
+   console.log(entryId);
+   $('#' + entryId).remove();
 }

@@ -19,7 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 /*
  * HTML Endpoints
  */
-
 app.get('/', function homepage (req, res) {
   res.sendFile(__dirname + '/view/index.html');
 });
@@ -52,7 +51,7 @@ app.post('/api/entry', function (req, res) {
      // get entry id from url params (`req.params`)
      //console.log('entry delete', req.params);
      var entryId = req.params.id;
-     console.log(entryId);
+     //console.log(entryId);
      // find the index of the entry we want to remove
      db.Entry.findOneAndRemove({ _id: entryId }, function (err, deletedEntry) {
        res.json(deletedEntry);
