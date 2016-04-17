@@ -24,7 +24,6 @@ $(document).ready(function() {
 
 /////////////Delete button////////////////////
 $entryList.on('click', '#deleteButton', function() {
-   //console.log($this);
    console.log('clicked delete button to', '/api/entry/'+$(this).attr('data-id'));
    $.ajax({
      method: 'DELETE',
