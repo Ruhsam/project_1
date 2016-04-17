@@ -24,6 +24,7 @@ $(document).ready(function() {
 
 /////////////Delete button////////////////////
 $entryList.on('click', '#deleteButton', function() {
+   console.log($this);
    console.log('clicked delete button to', '/api/entry/'+$(this).attr('data-id'));
    $.ajax({
      method: 'DELETE',
@@ -75,6 +76,4 @@ function renderEntry(entry) {
    var placingInfo = compileHB(entry);
    $('#entryPlace').prepend(placingInfo);
 
-
-   console.log('rendering entry:', entry);
 }
