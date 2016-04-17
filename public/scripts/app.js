@@ -55,13 +55,63 @@ $entryList.on('click', '#deleteButton', function() {
  //     success: onPutSuccess,
  //     error: onPutError
  // });
+ var entryTitle = $entryRow.find('span.entry-title');
+ var editTitle = $entryRow.find('input.edit-entry-title');
+ toggleEdit(entryTitle, editTitle);
+
+ var entryDate = $entryRow.find('span.entry-date');
+ var editDate = $entryRow.find('input.edit-entry-date');
+toggleEdit(entryDate, editDate);
+
+ var entryText = $entryRow.find('span.entry-text');
+ var editText = $entryRow.find('input.edit-entry-text');
+ toggleEdit(entryText, editText);
+ // editText.val(entryText.text());
+ // entryText.toggleClass('hidden', 'remove');
+ // editText.toggleClass('hidden', 'add');
+  //var entryTitle = $entryRow.find('span.entry-title').text();
+  //$entryRow.find('span.entry-title').html('<input class="edit-entry-title" value="' + entryTitle + '"></input>');
 });
+
+///////////////toggling function for hiding entry text during edit/////////////////
+function toggleEdit(entry, edit) {
+edit.val(entry.text());
+entry.toggleClass('hidden', true);
+edit.toggleClass('hidden', false);
+}
+
+function toggleCancel(entry, edit) {
+entry.toggleClass('hidden', false);
+edit.toggleClass('hidden', true);
+}
+
+function toggleSave(entry, edit) {
+entry.text(edit.val());
+entry.toggleClass('hidden', false);
+edit.toggleClass('hidden', true);
+}
 
 ///////cancel button/////////////
  $entryList.on('click', '#cancelButton', function(){
 console.log('Cancel button clicked');
+var $entryRow = $(this).closest('.entry');
+var entryId = $entryRow.data('entry-id');
+var entryTitle = $entryRow.find('span.entry-title');
+var editTitle = $entryRow.find('input.edit-entry-title');
+toggleCancel(entryTitle, editTitle);
+var entryDate = $entryRow.find('span.entry-date');
+var editDate = $entryRow.find('input.edit-entry-date');
+toggleCancel(entryDate, editDate);
+var entryText = $entryRow.find('span.entry-text');
+var editText = $entryRow.find('input.edit-entry-text');
+toggleCancel(entryText, editText);
  });
 
+
+/////////save button///////
+$entryList.on('click', '#saveButton', function(){
+console.log('Save button clicked');
+});
 }); // end of document ready
 
 
@@ -99,17 +149,11 @@ function onDeleteError() {
 function onPutSuccess(){
    console.log('Edit success');
 }
+
 function handleEditClick(e){
-
       console.log('edit entry', entryId);
-
-
-
-
-   // var entryTitle=$
-   // $
-
 }
+
 /////////////Renders post and get data to page///////////////
 function renderEntry(entry) {
    var pullingInfo = $('#entryTemplate').html();
