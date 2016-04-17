@@ -33,6 +33,34 @@ $entryList.on('click', '#deleteButton', function() {
    });
  });
 
+ //////////////Edit Button////////////////////
+ $entryList.on('click', '#editButton', function(){
+   var $entryRow = $(this).closest('.entry');
+   var entryId = $entryRow.data('entry-id');
+  console.log('clicked edit button');
+  //////////show the save changes button///////////
+  $entryRow.find('.save-entry').toggleClass('hidden', 'add');
+  ///////////hide the edit button////////////
+  $entryRow.find('.edit-entry').toggleClass('hidden', 'remove');
+  //////////////show cancel button/////////////
+  $entryRow.find('.cancel-entry').toggleClass('hidden', 'add');
+  //////////////hide delete button/////////////
+  $entryRow.find('.delete-entry').toggleClass('hidden', 'remove');
+
+ //  $.ajax({
+ //     method: 'PUT',
+ //     url: '/api/entry/'+$(this).attr('data-id'),
+ //     data: JSON.stringify(entryList.),
+ //     data-type: 'json',
+ //     success: onPutSuccess,
+ //     error: onPutError
+ // });
+});
+
+///////cancel button/////////////
+ $entryList.on('click', '#cancelButton', function(){
+console.log('Cancel button clicked');
+ });
 
 }); // end of document ready
 
@@ -67,7 +95,21 @@ function onDeleteSuccess(deletedEntry) {
 function onDeleteError() {
   console.log('Delete ERROR! Uh oh, something went wrong!');
 }
+///////////////Put functions///////////////////
+function onPutSuccess(){
+   console.log('Edit success');
+}
+function handleEditClick(e){
 
+      console.log('edit entry', entryId);
+
+
+
+
+   // var entryTitle=$
+   // $
+
+}
 /////////////Renders post and get data to page///////////////
 function renderEntry(entry) {
    var pullingInfo = $('#entryTemplate').html();
