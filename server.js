@@ -57,6 +57,24 @@ app.post('/api/entry', function (req, res) {
        res.json(deletedEntry);
      });
    });
+
+///////////////Editing route////////////////
+app.put('/api/entry/:id',function (req, res) {
+   console.log("Save Button Pressed");
+  db.Entry.findById(req.params.id, function(err, foundEntry) {
+    if(err) { console.log('db entry update error', err);
+}   else {
+    foundEntry.title = req.body.title;
+    foundEntry.date = req.body.date;
+    foundEntry.text = req.body.text;
+    foundEntry.save(function(err, savedEntry) {
+      if(err) { console.log('saving altered entry failed'); }
+      console.log(res.json(savedEntry));
+    });
+}
+  });
+
+});
 //
 //});
 
