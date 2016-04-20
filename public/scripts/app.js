@@ -69,12 +69,92 @@ $(document).ready(function() {
       entry.toggleClass('hidden', false);
       edit.toggleClass('hidden', true);
    }
+   function saveTitle(entryRow) {
+      var editTitle = entryRow.find('input.edit-entry-title');
+      var entryTitle = entryRow.find('span.entry-main-title');
+      entryTitle.text(editTitle.val());
+   }
 
    ///////cancel button/////////////
    $entryList.on('click', '#cancelButton', function(){
       console.log('Cancel button clicked');
       var entryRow = $(this).closest('.entry');
-      var entryId = entryRow.data('entry-id');
+      undoForm(entryRow);
+   });
+
+   /////////////////////button toggling on edit field/////////////
+   function buttonToggle(editing, entryRow){
+
+      //////////show the save changes button///////////
+      entryRow.find('.save-entry').toggleClass('hidden', !editing);
+      //////////////show cancel button/////////////
+      entryRow.find('.cancel-entry').toggleClass('hidden', !editing);
+      //////////////hide delete button/////////////
+      entryRow.find('.delete-entry').toggleClass('hidden', editing);
+      ///////////hide the edit button////////////
+      entryRow.find('.edit-entry').toggleClass('hidden', editing);
+   }
+
+   /////////save button///////
+   $entryList.on('click', '#saveButton', function(){
+      console.log('Save button clicked');
+      var entryRow = $(this).closest('.entry');
+      var editTitle = entryRow.find('input.edit-entry-title');
+      var entryTitle = entryRow.find('span.entry-title');
+      var editDate = entryRow.find('input.edit-entry-date');
+      var editText = entryRow.find('input.edit-entry-text');
+      var params={
+         title: editTitle.val(),
+         date: editDate.val(),
+         text: editText.val(),
+      };
+      $.ajax({
+         method: 'PUT',
+         url: '/api/entry/'+$(this).attr('data-id'),
+         data: params,
+         success: successBuilder(entryRow),
+         error: errorBuilder(entryRow)
+      });
+   });
+   ///////////////Put functions///////////////////
+   function successBuilder(entryRow){
+      return function (result, status, xhr){
+         console.log('Edit success');
+         keepForm(entryRow);
+         // var editTitle = entryRow.find('input.edit-entry-title');
+         // var entryTitle = entryRow.find('span.entry-title');
+         // toggleSave(entryTitle, editTitle);
+
+         //console.log(entryRow);
+      };
+   }
+
+   function errorBuilder(entryRow){
+      return function (result, status, xhr){
+         console.log('Edit fail');
+         undoForm(entryRow);
+      };
+   }
+
+   function keepForm(entryRow) {
+      saveTitle(entryRow);
+      var entryTitle = entryRow.find('span.entry-title');
+      var editTitle = entryRow.find('input.edit-entry-title');
+      toggleSave(entryTitle, editTitle);
+
+      var entryDate = entryRow.find('span.entry-date');
+      var editDate = entryRow.find('input.edit-entry-date');
+      toggleSave(entryDate, editDate);
+
+      var entryText = entryRow.find('span.entry-text');
+      var editText = entryRow.find('input.edit-entry-text');
+      toggleSave(entryText, editText);
+
+      buttonToggle(false, entryRow);
+   }
+
+   function undoForm(entryRow) {
+
       var entryTitle = entryRow.find('span.entry-title');
       var editTitle = entryRow.find('input.edit-entry-title');
       toggleCancel(entryTitle, editTitle);
@@ -85,38 +165,7 @@ $(document).ready(function() {
       var editText = entryRow.find('input.edit-entry-text');
       toggleCancel(entryText, editText);
       buttonToggle(false, entryRow);
-   });
-
-   /////////////////////button toggling on edit field/////////////
- function buttonToggle(editing, entryRow){
-
-   //////////show the save changes button///////////
-   entryRow.find('.save-entry').toggleClass('hidden', !editing);
-   //////////////show cancel button/////////////
-   entryRow.find('.cancel-entry').toggleClass('hidden', !editing);
-   //////////////hide delete button/////////////
-   entryRow.find('.delete-entry').toggleClass('hidden', editing);
-   ///////////hide the edit button////////////
-   entryRow.find('.edit-entry').toggleClass('hidden', editing);
-}
-
-/////////save button///////
-$entryList.on('click', '#saveButton', function(){
-   console.log('Save button clicked');
-   var params={
-      title:'something',
-      date: '02/03/2010',
-      text: 'poo poo to you'
-   };
-   $.ajax({
-      method: 'PUT',
-      url: '/api/entry/'+$(this).attr('data-id'),
-      data: params,
-      dataType: 'json',
-      success: onPutSuccess,
-      error: onPutError
-  });
-});
+   }
 }); // end of document ready
 
 
@@ -149,14 +198,6 @@ function onDeleteSuccess(deletedEntry) {
 }
 function onDeleteError() {
    console.log('Delete ERROR! Uh oh, something went wrong!');
-}
-///////////////Put functions///////////////////
-function onPutSuccess(res){
-   console.log('Edit success');
-}
-
-function onPutError(res){
-   console.log('Put didnt work');
 }
 
 function handleEditClick(e){

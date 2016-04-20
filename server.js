@@ -17,18 +17,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 /*
- * HTML Endpoints
- */
+* HTML Endpoints
+*/
 app.get('/', function homepage (req, res) {
-  res.sendFile(__dirname + '/view/index.html');
+   res.sendFile(__dirname + '/view/index.html');
 });
 
 //json endpoints
 app.get('/api/entry', function (req, res) {
-  db.Entry.find(function(err, entry){
-    if (err) { return console.log("index error: " + err); }
-    res.json(entry);
-  });
+   db.Entry.find(function(err, entry){
+      if (err) { return console.log("index error: " + err); }
+      res.json(entry);
+   });
 });
 
 
@@ -47,32 +47,40 @@ app.post('/api/entry', function (req, res) {
 
 ///////////////Removing from DB route//////////////////
 
-   app.delete('/api/entry/:id', function (req, res) {
-     // get entry id from url params (`req.params`)
-     //console.log('entry delete', req.params);
-     var entryId = req.params.id;
-     //console.log(entryId);
-     // find the index of the entry we want to remove
-     db.Entry.findOneAndRemove({ _id: entryId }, function (err, deletedEntry) {
-       res.json(deletedEntry);
-     });
+app.delete('/api/entry/:id', function (req, res) {
+   // get entry id from url params (`req.params`)
+   //console.log('entry delete', req.params);
+   var entryId = req.params.id;
+   //console.log(entryId);
+   // find the index of the entry we want to remove
+   db.Entry.findOneAndRemove({ _id: entryId }, function (err, deletedEntry) {
+      res.json(deletedEntry);
    });
+});
 
 ///////////////Editing route////////////////
 app.put('/api/entry/:id',function (req, res) {
    console.log("Save Button Pressed");
-  db.Entry.findById(req.params.id, function(err, foundEntry) {
-    if(err) { console.log('db entry update error', err);
-}   else {
-    foundEntry.title = req.body.title;
-    foundEntry.date = req.body.date;
-    foundEntry.text = req.body.text;
-    foundEntry.save(function(err, savedEntry) {
-      if(err) { console.log('saving altered entry failed'); }
-      console.log(res.json(savedEntry));
-    });
-}
-  });
+   db.Entry.findById(req.params.id, function(err, foundEntry) {
+      if(err) {
+         //console.log('db entry update error', err);
+         console.log('not editing');
+         res.sendStatus(404);
+      } else {
+         console.log(req.body);
+         foundEntry.title = req.body.title;
+         foundEntry.date = req.body.date;
+         foundEntry.text = req.body.text;
+         foundEntry.save(function(err, savedEntry) {
+            if(err) {
+               console.log('saving altered entry failed');
+               res.sendStatus(500);
+            }
+            console.log('final entry');
+            res.sendStatus(200);
+         });
+      }
+   });
 
 });
 //
@@ -80,5 +88,5 @@ app.put('/api/entry/:id',function (req, res) {
 
 // listen on port 3000
 app.listen(PORT, function () {
-  console.log('Express server is running on http://localhost:3000/');
+   console.log('Express server is running on http://localhost:3000/');
 });
