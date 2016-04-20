@@ -22,6 +22,7 @@
       <container>
          <div class="row">
             <div class="col-md-offset-4 col-md-4 col-xs-12 thumbnail entry-art">
+               <div class="main-form">
                <form class="form" id="formInfo">
                   <div class="form-group">
                      <label for="exampleInputName2">Title</label>
@@ -39,6 +40,7 @@
                </form>
             </container>
          </div>
+         </div>
       </div>
    </div>
    <div id="entryTarget">
@@ -49,11 +51,12 @@
             <div id="{{_id}}" class="row entry">
 
                <!-- *****overall entry size***** -->
+               <container>
                <div class="container" class="col-md-offset-1 col-md-5">
                   <h1><span class="entry-main-title">{{title}}</span></h1>
                   <div class="panel panel-default">
                      <div class="panel-body">
-
+                        <div class="floating-box">
                         <div id="handlebarsData" class="col-md-6">
                            <ul class="list-group">
                               <li class="list-group-item">
@@ -79,9 +82,13 @@
                               <button id="deleteButton" type="button" class="btn btn-danger delete-entry" data-id={{_id}}><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
                               <button id="cancelButton" type="button" class="btn btn-warning cancel-entry hidden" data-id={{_id}}><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>Cancel</button>
                            </div>
+               </container>
 
                            <!-- *****comment form***** -->
+                        <container>
                            <div class="panel-body" class="container">
+                              <div class="scrollbox">
+
                               <form class="col-md-offset-1 col-md-4">
                                  <div class="row">
                                     <div>
@@ -90,22 +97,21 @@
                                        <div class="span3"><label>Date</label>
                                           <input type="date"  placeholder="Company">
                                        </div>
-                                       <div class="span5">
-                                          <label>Comment</label>
-                                          <textarea rows="3" style="margin: 0px; width: 431px; height: 167px;"></textarea>
+                                          <div class="span5">
+                                             <label>Comment</label>
+                                             <textarea rows="3" style="margin: 0px; width: 431px; height: 167px;"></textarea>
+                                          </div>
                                        </div>
                                     </div>
-                                 </div>
-                                 <button id="editButton" type="button" class="btn btn-primary edit-entry" data-id={{_id}}><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Edit</button>
-                                 <button id="saveButton" type="button" class="btn btn-success save-entry hidden" data-id={{_id}}><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>Save</button>
-                                 <button id="deleteButton" type="button" class="btn btn-danger delete-entry" data-id={{_id}}><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
-                                 <button id="cancelButton" type="button" class="btn btn-warning cancel-entry hidden" data-id={{_id}}><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>Cancel</button>
-
-
+                                 <button id="deleteButton" type="button" class="btn btn-danger delete-comment" data-id={{_id}}><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
+                              </div>
+                                 <button id="submitComment" type="button" class="btn btn-success new-comment btn-lg btn-block" data-id={{_id}}><span class="glyphicon glyphicon-list"></span> New Comment</button>
 
                               </form>
                            </div>
+                           </container>
                               <!-- end of entry internal row -->
+                        </div>
                         </div>
                      </div>
                   </div>
