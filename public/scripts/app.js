@@ -219,7 +219,6 @@ function onPostError() {
 function onCommentSuccess(json) {
    console.log(json, 'Comment Post SUCCESS! Yeah we posted it!');
    renderEntry(json);
-   location.reload(true);
    //});
 }
 function onCommentError() {

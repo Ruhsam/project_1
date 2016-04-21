@@ -45,6 +45,21 @@ app.post('/api/entry', function (req, res) {
    });
 });
 
+///////////////Posting Comment to DB route//////////////////
+app.post('/api/comment', function (req, res) {
+   console.log(req.body);
+   res.status(200);
+   var newComment = new db.Comment({
+      name: req.body.name,
+      date: req.body.date,
+      text: req.body.text,
+   });
+   newComment.save(function(err, saved) {
+      console.log('test comment test', req.body);
+      res.json(saved);
+   });
+});
+
 ///////////////Removing from DB route//////////////////
 
 app.delete('/api/entry/:id', function (req, res) {

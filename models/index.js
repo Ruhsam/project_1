@@ -5,4 +5,4 @@ mongoose.connect( process.env.MONGOLAB_URI ||
                        "mongodb://localhost/project_1" );
 
 module.exports.Entry = require('./entry');
-//module.exports.Comment = require('./comment')
+module.exports.Comment = require('./comment');
