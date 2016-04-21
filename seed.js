@@ -71,9 +71,9 @@ commentList.push({
 });
 
 // populate each entry comment
-entryList.forEach(function(entry) {
-  entry.comments = commentList;
-});
+// entryList.forEach(function(entry) {
+//   entry.comments = commentList;
+// });
 
 
 db.Entry.remove({}, function(err, entry){
@@ -86,12 +86,12 @@ db.Entry.remove({}, function(err, entry){
    });
 });
 
-db.Comment.remove({}, function(err, comment){
-
-   db.Comment.create(entryList, function(err, comment){
-      if (err) { return console.log('ERROR', err); }
-      console.log("all comment:", comment);
-      console.log("created", comment.length, "comment");
-      process.exit();
-   });
-});
+ db.Comment.remove({}, function(err, comment){
+//
+//    db.Comment.create(commentList, function(err, comment){
+//       if (err) { return console.log('ERROR', err); }
+//       console.log("all comment:", comment);
+//       console.log("created", comment.length, "comment");
+//       process.exit();
+//    });
+ });

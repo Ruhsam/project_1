@@ -122,9 +122,12 @@ $(document).ready(function() {
       var entryRow = $(this).closest('.entry');
       var editName = entryRow.find('input.comment-name');
       var editText = entryRow.find('textarea.comment-text');
+      var entryId = entryRow.attr('data-id');
+      console.log(entryId);
       console.log(editText.val());
       console.log(editName.val());
       var params={
+         entryId: entryId,
          name: editName.val(),
          date: Date.now().toString(),
          text: editText.val()
@@ -150,8 +153,8 @@ $(document).ready(function() {
       $.ajax({
          method: 'DELETE',
          url: '/api/comment/' + deleteMe,
-         success: onCommentSuccess,
-         error: onCommentError
+         success: onCommentDeleteSuccess,
+         error: onCommentDeleteError
       });
    });
 
@@ -233,9 +236,20 @@ function onPostError() {
 //////////////Comment "POST" confirmation data/////////////
 function onCommentSuccess(json) {
    console.log(json, 'Comment Post SUCCESS! Yeah we posted it!');
-   renderEntry(json);
+   location.reload(true);
    //});
 }
+
+function onCommentDeleteError(json) {
+   console.log('Comment Delete Error');
+}
+
+
+function onCommentDeleteSuccess(json) {
+   console.log(json, 'Comment Deleted');
+   location.reload(true);
+}
+
 function onCommentError() {
    console.log('ERROR! Uh oh, something in the comment went wrong!');
 }

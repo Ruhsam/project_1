@@ -48,16 +48,19 @@ app.post('/api/entry', function (req, res) {
 ///////////////Posting Comment to DB route//////////////////
 app.post('/api/comment', function (req, res) {
    console.log(req.body);
+   db.Entry.findById(req.body.entryId, function(err, foundEntry){
+      var newComment = new db.Comment({
+         name: req.body.name,
+         date: req.body.date,
+         text: req.body.text,
+      });
+      foundEntry.comments.push(newComment);
+      foundEntry.save(function(err, savedEntry){
+         res.json(newComment);
+      });
+   });
    res.status(200);
-   var newComment = new db.Comment({
-      name: req.body.name,
-      date: req.body.date,
-      text: req.body.text,
-   });
-   newComment.save(function(err, saved) {
-      console.log('test comment test', req.body);
-      res.json(saved);
-   });
+
 });
 
 ///////////////Removing from DB route//////////////////
@@ -79,7 +82,10 @@ app.delete('/api/comment/:id', function (req, res) {
    // get comment id from url
    var commentId = req.params.id;
    // find the index of the comment we want to remove
-   db.Comment.findOneAndRemove({ _id: commentId }, function (err, deletedComment) {
+   console.log(commentId);
+   db.Comment.find({}, function (err, deletedComment) {
+      // db.Comment.findOneAndRemove({ _id: commentId }, function (err, deletedComment) {
+      console.log(deletedComment);
       if (err){
          console.log('shit broke');
       } else {
