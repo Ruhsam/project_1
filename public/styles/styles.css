@@ -54,3 +54,9 @@ body {
    font-family:palatino linotype, palatino, serif;
    line-height:2;
 }
+
+#c-form-start{
+   height: 240px;
+   width: 400px;
+   border:2px solid  #3a3a3a;
+}
