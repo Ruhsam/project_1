@@ -75,3 +75,9 @@ body {
     border-color: #204d74;
     margin: 10px;
 }
+#formInfo{
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   margin: 10px;
+}
