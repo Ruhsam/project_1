@@ -73,6 +73,22 @@ app.delete('/api/entry/:id', function (req, res) {
    });
 });
 
+///////////////Removing Comment from DB route//////////////////
+
+app.delete('/api/comment/:id', function (req, res) {
+   // get comment id from url
+   var commentId = req.params.id;
+   // find the index of the comment we want to remove
+   db.Comment.findOneAndRemove({ _id: commentId }, function (err, deletedComment) {
+      if (err){
+         console.log('shit broke');
+      } else {
+         console.log('worked');
+      res.json(deletedComment);
+   }
+   });
+});
+
 ///////////////Editing route////////////////
 app.put('/api/entry/:id',function (req, res) {
    console.log("Save Button Pressed");

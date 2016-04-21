@@ -82,6 +82,7 @@
                                     <button id="deleteButton" type="button" class="btn btn-danger delete-entry" data-id={{_id}}><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
                                     <button id="cancelButton" type="button" class="btn btn-warning cancel-entry hidden" data-id={{_id}}><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>Cancel</button>
                                     <div>
+                                       <!-- Comment form start -->
                                        <div class="col-md-offset-1 col-md-4">
                                           <div class="row">
                                              <div>
@@ -93,7 +94,6 @@
                                                 </div>
                                              </div>
                                           </div>
-                                          <button id="deleteButton" type="button" class="btn btn-danger delete-comment" data-id={{_id}}><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
                                           <button id="newComment" type="button" class="btn btn-success new-comment btn-lg btn-block" data-id={{_id}}><span class="glyphicon glyphicon-fire"></span> Submit Comment</button>
                                        </div>
                                     </div>
@@ -103,12 +103,12 @@
 
                            <!-- *****comment form***** -->
                            <container>
-                              <div class="panel-body" class="container">
-                                    <div class="scrollbox">
-
-
+                              <div class="panel-body">
+                                 <div class="scrollbox">
+                                 {{&commentsHelper comments}}
                                  </div>
                               </container>
+
                               <!-- end of entry internal row -->
                            </div>
                         </div>
@@ -124,8 +124,21 @@
 
             </div>
          </script>
+      <div id="comment-target">
+         <div id="comment">
+            <script id="commentTemplate" type="text/x-handlebars-template">
+               <div>
+                  <div class="comment-name">{{name}}</div></br>
+                  <div class="comment-date">{{date}}</div></br>
+                  <div class="comment-text">{{text}}</div></br>
+               </br>
+            </div>
+            <button id="commentDelete" data-id="{{_id}}" type="button" class="btn btn-danger delete-comment" data-id={{_id}}><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
+         </script>
       </div>
-      <div id = "entryPlace"></div>
+      </div>
    </div>
+   <div id = "entryPlace"></div>
+</div>
 </body>
 </html>

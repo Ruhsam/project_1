@@ -140,6 +140,21 @@ $(document).ready(function() {
    });
 
    /////////////////New Comment End//////////////////////
+
+   //////////////////Delete Comment Click////////////////
+   $entryList.on('click', '#commentDelete', function(e) {
+      console.log('delete-comment clicked!');
+      var deleteMe = $(this).data('id');
+      console.log(deleteMe);
+      /////HTTP "POST" comment code sent to server/////
+      $.ajax({
+         method: 'DELETE',
+         url: '/api/comment/' + deleteMe,
+         success: onCommentSuccess,
+         error: onCommentError
+      });
+   });
+
    ///////////////Put functions///////////////////
    function successBuilder(entryRow){
       return function (result, status, xhr){
@@ -246,13 +261,24 @@ function renderEntry(entry) {
    var compileHB = Handlebars.compile(pullingInfo);
    var placingInfo = compileHB(entry);
    $('#entryPlace').prepend(placingInfo);
-
+   //console.log(entry);
 }
 
 function removeEntry(entryId) {
    console.log(entryId);
    $('#' + entryId).remove();
 }
+
+//////////////Handlebars for comments/////////
+Handlebars.registerHelper('commentsHelper', function(comments){
+   var template = Handlebars.compile($('#commentTemplate').html());
+   var allComments = "";
+   comments.forEach(function(comment){
+      allComments += template(comment);
+   });
+   return allComments;
+
+});
 
 //////////////////Comment Modal//////////////////
 // function handleAddComment(e) {
