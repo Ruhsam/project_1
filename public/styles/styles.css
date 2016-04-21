@@ -64,12 +64,8 @@ body {
    margin:auto;
 
 }
-.form-entries{
-   height: auto;
-   width: auto;
-   border:1px solid  #3a3a3a;
-   position: center;
-   padding: 20px 0 20px 40px;
-   margin:auto;
-
+.list-group {
+    padding-left: 0;
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
