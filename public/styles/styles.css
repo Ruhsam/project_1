@@ -69,3 +69,9 @@ body {
     margin-bottom: 20px;
     margin-top: 10px;
 }
+.btn-primary {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+    margin: 10px;
+}
