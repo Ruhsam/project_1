@@ -105,37 +105,32 @@
                            <container>
                               <div class="panel-body">
                                  <div class="scrollbox">
-                                 {{&commentsHelper comments}}
+                                    {{&commentsHelper comments}}
                                  </div>
                               </container>
 
-                              <!-- end of entry internal row -->
+                              <!-- end of comment form-->
                            </div>
                         </div>
                      </div>
                   </div>
-                  <!-- ****Entry info end**** -->
-
                </ul>
-
                <div class="panel-footer">
                </div>
-
-
             </div>
          </script>
-      <div id="comment-target">
-         <div id="comment">
-            <script id="commentTemplate" type="text/x-handlebars-template">
-               <div>
-                  <div class="comment-name">{{name}}</div></br>
-                  <div class="comment-date">{{date}}</div></br>
-                  <div class="comment-text">{{text}}</div></br>
-               </br>
-            </div>
-            <button id="commentDelete" data-id="{{_id}}" type="button" class="btn btn-danger delete-comment" data-id={{_id}}><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
-         </script>
-      </div>
+         <div id="comment-target">
+            <div id="comment">
+               <script id="commentTemplate" type="text/x-handlebars-template">
+                  <div>
+                     <div class="comment-name">{{name}}</div></br>
+                     <div class="comment-date">{{date}}</div></br>
+                     <div class="comment-text">{{text}}</div></br>
+                  </br>
+               </div>
+               <button id="commentDelete" data-id="{{_id}}" type="button" class="btn btn-danger delete-comment" data-id={{_id}}><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
+            </script>
+         </div>
       </div>
    </div>
    <div id = "entryPlace"></div>
