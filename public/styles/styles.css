@@ -22,7 +22,7 @@ body {
 }
 
 .floating-box{
-   position: relative;
+   position: center;
    padding: auto;
    margin:auto;
 }
