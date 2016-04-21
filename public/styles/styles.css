@@ -26,3 +26,31 @@ body {
    padding: auto;
    margin:auto;
 }
+.live-title {
+text-shadow:2px 3px 2px rgba(21,77,115,0.5);
+font-weight:bold;
+font-style:oblique;
+text-transform:uppercase;
+color:#19C2FF;
+letter-spacing:1pt;
+word-spacing:2pt;
+font-size:59px;
+text-align:center;
+font-family:palatino linotype, palatino, serif;
+line-height:2;
+margin:0px;padding:0px;
+}
+
+
+.not-title{
+text-shadow:2px 3px 2px rgba(21,77,115,0.5);
+font-weight:bold;
+font-style:oblique;
+color:#EB0000;
+letter-spacing:1pt;
+word-spacing:2pt;
+font-size:50px;
+text-align:center;
+font-family:palatino linotype, palatino, serif;
+line-height:2;
+}

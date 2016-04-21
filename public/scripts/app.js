@@ -116,6 +116,30 @@ $(document).ready(function() {
          error: errorBuilder(entryRow)
       });
    });
+   //////////////////New Comment Click////////////////
+   $entryList.on('click', '#newComment', function handleAddComment(e) {
+      console.log('add-comment clicked!');
+      var entryRow = $(this).closest('.entry');
+      var editName = entryRow.find('input.comment-name');
+      var editText = entryRow.find('textarea.comment-text');
+      console.log(editText.val());
+      console.log(editName.val());
+      var params={
+         name: editName.val(),
+         date: Date.now().toString(),
+         text: editText.val()
+      };
+      /////HTTP "POST" comment code sent to server/////
+      $.ajax({
+         method: 'POST',
+         url: '/api/comment',
+         data: params,
+         success: onCommentSuccess,
+         error: onCommentError
+      });
+   });
+
+   /////////////////New Comment End//////////////////////
    ///////////////Put functions///////////////////
    function successBuilder(entryRow){
       return function (result, status, xhr){
@@ -190,6 +214,19 @@ function onPostSuccess(json) {
 function onPostError() {
    console.log('ERROR! Uh oh, something went wrong!');
 }
+
+//////////////Comment "POST" confirmation data/////////////
+function onCommentSuccess(json) {
+   console.log(json, 'Comment Post SUCCESS! Yeah we posted it!');
+   renderEntry(json);
+   location.reload(true);
+   //});
+}
+function onCommentError() {
+   console.log('ERROR! Uh oh, something in the comment went wrong!');
+}
+
+
 //////////////"DELETE" confirmation data/////////////
 function onDeleteSuccess(deletedEntry) {
    console.log(deletedEntry, 'Delete SUCCESS! Well there goes that!');
@@ -204,7 +241,7 @@ function handleEditClick(e){
    console.log('edit entry', entryId);
 }
 
-/////////////Renders post and get data to page///////////////
+/////////////Handlebars renders post and get data to page///////////////
 function renderEntry(entry) {
    var pullingInfo = $('#entryTemplate').html();
    var compileHB = Handlebars.compile(pullingInfo);
@@ -217,3 +254,15 @@ function removeEntry(entryId) {
    console.log(entryId);
    $('#' + entryId).remove();
 }
+
+//////////////////Comment Modal//////////////////
+// function handleAddComment(e) {
+//   console.log('add-comment clicked!');
+//   console.log(e);
+//   var entryRow = e.currentTarget.closest('.entry');
+//   var entryId = entryRow.data('entry-id');
+//   //var currentEntryId = $(this).closest('.entry').data('entry-id');
+//   console.log('entry-id',currentEntryId);
+//   // $('#commentModal').data('entry-id', currentEntryId);
+//   // $('#commentModal').modal();
+//}

@@ -3,10 +3,10 @@
 <head>
    <meta charset="utf-8">
    <title>Journal</title>
-   <!-- bootstrap stylesheet link -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
    <!-- jquery cdn -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+   <!-- bootstrap stylesheet link -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
    <!-- boot strap cdn -->
    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
    <!-- handlebars cdn -->
@@ -18,28 +18,28 @@
 </head>
 <body>
    <div>
-      <h1 class="text-center">Not liveJournal</h1>
+      <h1 class="not-title" class="text-center">Not</h1><h1 class="live-title" class="text-center"> liveJournal</h1>
       <container>
          <div class="row">
             <div class="col-md-offset-4 col-md-4 col-xs-12 thumbnail entry-art">
                <div class="main-form">
-               <form class="form" id="formInfo">
-                  <div class="form-group">
-                     <label for="exampleInputName2">Title</label>
-                     <input type="text" name="title" class="form-control" id="exampleInputName2" placeholder="Hue Jass">
-                  </div>
-                  <div class="form-group">
-                     <label for="Date">Today's Date</label>
-                     <input type="Date" class="form-control" name="date" id="entryDate" placeholder="04/09/1986">
-                  </div>
-                  <div class="form-text">
-                     <label for="textarea">Journal Entry</label>
-                     <textarea class="form-control" name="text"  rows="3"></textarea>
-                  </div>
-                  <button id= "submission" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Submit</button>
-               </form>
-            </container>
-         </div>
+                  <form class="form" id="formInfo">
+                     <div class="form-group">
+                        <label for="exampleInputName2">Title</label>
+                        <input type="text" name="title" class="form-control" id="exampleInputName2" placeholder="Hue Jass">
+                     </div>
+                     <div class="form-group">
+                        <label for="Date">Today's Date</label>
+                        <input type="Date" class="form-control" name="date" id="entryDate" placeholder="04/09/1986">
+                     </div>
+                     <div class="form-text">
+                        <label for="textarea">Journal Entry</label>
+                        <textarea class="form-control" name="text"  rows="3"></textarea>
+                     </div>
+                     <button id= "submission" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Submit</button>
+                  </form>
+               </container>
+            </div>
          </div>
       </div>
    </div>
@@ -48,70 +48,69 @@
       <div id="entry">
          <script id="entryTemplate" type="text/x-handlebars-template">
             <!-- one entry -->
-            <div id="{{_id}}" class="row entry">
+            <div id="{{_id}}" data-id={{_id}} class="row entry">
 
                <!-- *****overall entry size***** -->
                <container>
-               <div class="container" class="col-md-offset-1 col-md-5">
-                  <h1><span class="entry-main-title">{{title}}</span></h1>
-                  <div class="panel panel-default">
-                     <div class="panel-body">
-                        <div class="floating-box">
-                        <div id="handlebarsData" class="col-md-6">
-                           <ul class="list-group">
-                              <li class="list-group-item">
-                                 <h4 class="inline-header">entry title:</h4>
-                                 <span class="entry-title">{{title}}</span>
-                                 <input class="edit-entry-title hidden" value=""></input>
-                              </li>
+                  <div class="container" class="col-md-offset-1 col-md-5">
+                     <h1><span class="entry-main-title">{{title}}</span></h1>
+                     <div class="panel panel-default">
+                        <div class="panel-body">
+                           <div class="floating-box">
+                              <div id="handlebarsData" class="col-md-6">
+                                 <ul class="list-group">
+                                    <li class="list-group-item">
+                                       <h4 class="inline-header">entry title:</h4>
+                                       <span class="entry-title">{{title}}</span>
+                                       <input class="edit-entry-title hidden" value=""></input>
+                                    </li>
 
-                              <li class="list-group-item">
-                                 <h4 class="inline-header">entry date:</h4>
-                                 <span class="entry-date">{{date}}</span>
-                                 <input class="edit-entry-date hidden" value=""></input>
-                              </li>
+                                    <li class="list-group-item">
+                                       <h4 class="inline-header">entry date:</h4>
+                                       <span class="entry-date">{{date}}</span>
+                                       <input class="edit-entry-date hidden" value=""></input>
+                                    </li>
 
-                              <li class="list-group-item">
-                                 <h4 class="inline-header">entry text:</h4>
-                                 <span class="entry-text">{{text}}</span>
-                                 <input class="edit-entry-text hidden" value=""></input>
-                              </li>
+                                    <li class="list-group-item">
+                                       <h4 class="inline-header">entry text:</h4>
+                                       <span class="entry-text">{{text}}</span>
+                                       <input class="edit-entry-text hidden" value=""></input>
+                                    </li>
 
-                              <button id="editButton" type="button" class="btn btn-primary edit-entry" data-id={{_id}}><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Edit</button>
-                              <button id="saveButton" type="button" class="btn btn-success save-entry hidden" data-id={{_id}}><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>Save</button>
-                              <button id="deleteButton" type="button" class="btn btn-danger delete-entry" data-id={{_id}}><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
-                              <button id="cancelButton" type="button" class="btn btn-warning cancel-entry hidden" data-id={{_id}}><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>Cancel</button>
-                           </div>
-               </container>
+                                    <button id="editButton" type="button" class="btn btn-primary edit-entry" data-id={{_id}}><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Edit</button>
+                                    <button id="saveButton" type="button" class="btn btn-success save-entry hidden" data-id={{_id}}><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>Save</button>
+                                    <button id="deleteButton" type="button" class="btn btn-danger delete-entry" data-id={{_id}}><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
+                                    <button id="cancelButton" type="button" class="btn btn-warning cancel-entry hidden" data-id={{_id}}><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>Cancel</button>
+                                    <div>
+                                       <form class="col-md-offset-1 col-md-4">
+                                          <div class="row">
+                                             <div>
+                                                <label>Name</label>
+                                                <input class="comment-name" type="text" placeholder="Jason">
+                                                <div class="span5">
+                                                   <label>Comment</label>
+                                                   <textarea class="comment-text" rows="3" style="margin: 0px; width: 431px; height: 167px;"></textarea>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <button id="deleteButton" type="button" class="btn btn-danger delete-comment" data-id={{_id}}><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
+                                          <button id="newComment" type="button" class="btn btn-success new-comment btn-lg btn-block" data-id={{_id}}><span class="glyphicon glyphicon-fire"></span> Submit Comment</button>
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
+                           </container>
 
                            <!-- *****comment form***** -->
-                        <container>
-                           <div class="panel-body" class="container">
-                              <div class="scrollbox">
+                           <container>
+                              <div class="panel-body" class="container">
+                                    <div class="scrollbox">
 
-                              <form class="col-md-offset-1 col-md-4">
-                                 <div class="row">
-                                    <div>
-                                       <label>Name</label>
-                                       <input type="text" placeholder="Jason">
-                                       <div class="span3"><label>Date</label>
-                                          <input type="date"  placeholder="Company">
-                                       </div>
-                                          <div class="span5">
-                                             <label>Comment</label>
-                                             <textarea rows="3" style="margin: 0px; width: 431px; height: 167px;"></textarea>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 <button id="deleteButton" type="button" class="btn btn-danger delete-comment" data-id={{_id}}><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
-                              </div>
-                                 <button id="submitComment" type="button" class="btn btn-success new-comment btn-lg btn-block" data-id={{_id}}><span class="glyphicon glyphicon-list"></span> New Comment</button>
 
-                              </form>
-                           </div>
-                           </container>
+                                 </div>
+                              </container>
                               <!-- end of entry internal row -->
-                        </div>
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -127,6 +126,6 @@
          </script>
       </div>
       <div id = "entryPlace"></div>
-
-   </body>
-   </html>
+   </div>
+</body>
+</html>
